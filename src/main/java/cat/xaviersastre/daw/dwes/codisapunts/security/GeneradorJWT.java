@@ -45,11 +45,11 @@ public class GeneradorJWT {
     public String obtenirUsuariDelToken(String token) {
         SecretKey clau = Keys.hmacShaKeyFor(clauSecreta.getBytes());
         
-        return Jwts.parserBuilder()
-                .setSigningKey(clau)
+        return Jwts.parser()
+                .verifyWith(clau)
                 .build()
-                .parseClaimsJws(token)
-                .getBody()
+                .parseSignedClaims(token)
+                .getPayload()
                 .getSubject();
     }
     
@@ -60,10 +60,10 @@ public class GeneradorJWT {
         try {
             SecretKey clau = Keys.hmacShaKeyFor(clauSecreta.getBytes());
             
-            Jwts.parserBuilder()
-                    .setSigningKey(clau)
+            Jwts.parser()
+                    .verifyWith(clau)
                     .build()
-                    .parseClaimsJws(token);
+                    .parseSignedClaims(token);
             
             return true;
         } catch (Exception e) {

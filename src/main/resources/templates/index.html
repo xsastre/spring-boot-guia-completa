@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestió d'Usuaris - Spring Boot Demo</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Spring Boot - Gestió d'Usuaris</h1>
+            <p>Demo de Thymeleaf amb funcionalitat CRUD</p>
+        </header>
+
+        <nav>
+            <a href="/web" class="btn btn-primary">Inici</a>
+            <a href="/web/nou" class="btn btn-success">➕ Nou Usuari</a>
+            <a href="/swagger-ui.html" class="btn btn-info" target="_blank">📖 API Documentation</a>
+        </nav>
+
+        <div th:if="${error}" class="alert alert-danger">
+            <strong>Error:</strong> <span th:text="${error}"></span>
+        </div>
+
+        <main>
+            <h2>Llistat d'Usuaris</h2>
+            
+            <div th:if="${usuaris.isEmpty()}" class="alert alert-info">
+                <p>No hi ha usuaris registrats. Fes clic a "Nou Usuari" per crear-ne un.</p>
+            </div>
+
+            <table th:if="${!usuaris.isEmpty()}">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Actiu</th>
+                        <th>Accions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="usuari : ${usuaris}">
+                        <td th:text="${usuari.id}"></td>
+                        <td th:text="${usuari.nom}"></td>
+                        <td th:text="${usuari.mail}"></td>
+                        <td>
+                            <span class="badge" th:classappend="${usuari.rol == 'ADMIN'} ? 'badge-admin' : 'badge-user'" 
+                                  th:text="${usuari.rol}"></span>
+                        </td>
+                        <td>
+                            <span class="badge" th:classappend="${usuari.actiu} ? 'badge-success' : 'badge-inactive'" 
+                                  th:text="${usuari.actiu ? 'Sí' : 'No'}"></span>
+                        </td>
+                        <td class="actions">
+                            <a th:href="@{/web/editar/{id}(id=${usuari.id})}" class="btn btn-sm btn-warning">✏️ Editar</a>
+                            <a th:href="@{/web/eliminar/{id}(id=${usuari.id})}" 
+                               class="btn btn-sm btn-danger"
+                               onclick="return confirm('Estàs segur que vols eliminar aquest usuari?')">🗑️ Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <footer>
+            <p>Spring Boot Guia Completa - Demo Thymeleaf amb Swagger</p>
+            <p><a href="https://github.com/xsastre/spring-boot-guia-completa" target="_blank">GitHub Repository</a></p>
+        </footer>
+    </div>
+</body>
+</html>

@@ -63,7 +63,7 @@ public class ControladorWeb {
      * Processa el formulari per guardar un usuari
      */
     @PostMapping("/guardar")
-    public String guardarUsuari(@ModelAttribute Usuari usuari) {
+    public String guardarUsuari(@ModelAttribute Usuari usuari, Model model) {
         try {
             if (usuari.getId() != null) {
                 serveiUsuaris.actualitzar(usuari.getId(), usuari);
@@ -71,7 +71,10 @@ public class ControladorWeb {
                 serveiUsuaris.guardar(usuari);
             }
         } catch (Exception e) {
-            // En cas d'error, redirigeix igualment
+            model.addAttribute("error", "Error al guardar l'usuari: " + e.getMessage());
+            model.addAttribute("usuari", usuari);
+            model.addAttribute("accio", usuari.getId() != null ? "Editar" : "Crear");
+            return "formulari-usuari";
         }
         return "redirect:/web";
     }
@@ -80,11 +83,11 @@ public class ControladorWeb {
      * Elimina un usuari
      */
     @GetMapping("/eliminar/{id}")
-    public String eliminarUsuari(@PathVariable Long id) {
+    public String eliminarUsuari(@PathVariable Long id, Model model) {
         try {
             serveiUsuaris.eliminar(id);
         } catch (Exception e) {
-            // En cas d'error, redirigeix igualment
+            model.addAttribute("error", "Error al eliminar l'usuari: " + e.getMessage());
         }
         return "redirect:/web";
     }

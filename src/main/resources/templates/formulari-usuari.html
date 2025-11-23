@@ -19,6 +19,10 @@
         </nav>
 
         <main>
+            <div th:if="${error}" class="alert alert-danger">
+                <strong>Error:</strong> <span th:text="${error}"></span>
+            </div>
+
             <div class="form-container">
                 <h2 th:text="${accio} + ' Usuari'"></h2>
                 

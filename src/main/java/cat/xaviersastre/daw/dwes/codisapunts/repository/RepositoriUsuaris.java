@@ -4,7 +4,6 @@ import cat.xaviersastre.daw.dwes.codisapunts.model.Usuari;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import com.example.miapp.model.Usuari;
 import java.util.Optional;
 import java.util.List;
 
@@ -44,5 +43,5 @@ public interface RepositoriUsuaris extends JpaRepository<Usuari, Long> {
     /**
      * Comptar el nombre d'usuaris actius
      */
-    long countByActivoTrue();
+    long countByActiuTrue();
 }

@@ -1,0 +1,99 @@
+# Fitxers i carpetes a ignorar en Git
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+.flattened-pom.xml
+
+# IDE - IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# IDE - Visual Studio Code
+.vscode/
+*.code-workspace
+
+# IDE - Eclipse
+.classpath
+.project
+.settings/
+.factorypath
+
+# IDE - NetBeans
+nbproject/
+.nb-gradle/
+
+# IDE - Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# JetBrains
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.directory
+
+# Fitxers de log
+*.log
+logs/
+*.log.*
+
+# Fitxers compilats
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+
+# Directori de compilació Gradle
+.gradle/
+build/
+
+# Fitxers de propietats locals
+local.properties
+application-local.properties
+
+# Fitxers de seguretat
+*.p12
+*.pfx
+*.jks
+.env
+.env.local
+*.pem
+
+# Base de dades H2
+*.h2.db
+*.mv.db
+
+# Fitxers temporals
+*.tmp
+*.bak
+*.swp
+
+# Altres
+node_modules/
+dist/
+.cache/
+.npm/

@@ -7,9 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Classe principal de l'aplicació Spring Boot
  */
 @SpringBootApplication
-public class MiAplicacioApplication {
+public class AppInicial {
     
     public static void main(String[] args) {
-        SpringApplication.run(MiAplicacioApplication.class, args);
+        SpringApplication.run(AppInicial.class, args);
     }
 }

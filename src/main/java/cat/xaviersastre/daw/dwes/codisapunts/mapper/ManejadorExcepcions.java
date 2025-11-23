@@ -1,5 +1,6 @@
 package cat.xaviersastre.daw.dwes.codisapunts.mapper;
 
+import cat.xaviersastre.daw.dwes.codisapunts.exception.UsuariNoTrobatException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

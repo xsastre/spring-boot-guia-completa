@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${accio} + ' Usuari - Spring Boot Demo'">Formulari Usuari</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Spring Boot - Gestió d'Usuaris</h1>
+            <p th:text="${accio} + ' Usuari'"></p>
+        </header>
+
+        <nav>
+            <a href="/web" class="btn btn-primary">← Tornar al llistat</a>
+            <a href="/swagger-ui.html" class="btn btn-info" target="_blank">📖 API Documentation</a>
+        </nav>
+
+        <main>
+            <div class="form-container">
+                <h2 th:text="${accio} + ' Usuari'"></h2>
+                
+                <form th:action="@{/web/guardar}" th:object="${usuari}" method="post">
+                    <input type="hidden" th:field="*{id}" />
+                    
+                    <div class="form-group">
+                        <label for="nom">Nom:</label>
+                        <input type="text" id="nom" th:field="*{nom}" required 
+                               placeholder="Introdueix el nom de l'usuari" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mail">Email:</label>
+                        <input type="email" id="mail" th:field="*{mail}" required 
+                               placeholder="usuari@example.com" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contrasenya">Contrasenya:</label>
+                        <input type="password" id="contrasenya" th:field="*{contrasenya}" 
+                               th:required="${usuari.id == null}"
+                               placeholder="Introdueix la contrasenya" />
+                        <small th:if="${usuari.id != null}">Deixa en blanc per mantenir la contrasenya actual</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rol">Rol:</label>
+                        <select id="rol" th:field="*{rol}" required>
+                            <option value="">Selecciona un rol</option>
+                            <option value="USER">USER</option>
+                            <option value="ADMIN">ADMIN</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" th:field="*{actiu}" />
+                            <span>Usuari actiu</span>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">💾 Guardar</button>
+                        <a href="/web" class="btn btn-secondary">❌ Cancel·lar</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <footer>
+            <p>Spring Boot Guia Completa - Demo Thymeleaf amb Swagger</p>
+            <p><a href="https://github.com/xsastre/spring-boot-guia-completa" target="_blank">GitHub Repository</a></p>
+        </footer>
+    </div>
+</body>
+</html>

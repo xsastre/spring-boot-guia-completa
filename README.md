@@ -57,27 +57,48 @@ spring.datasource.password=teva_contrasenya
 # Instal·la dependències
 mvn clean install
 
-# Executa l'aplicació
+# Executa l'aplicació amb MySQL (requereix MySQL instal·lat)
 mvn spring-boot:run
+
+# O executa amb H2 (base de dades en memòria, ideal per a proves)
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
 ```
 
 L'aplicació estarà disponible en: `http://localhost:8080`
 
+**Nota**: Amb el perfil `dev`, pots accedir a la consola H2 a `http://localhost:8080/h2-console` amb:
+- JDBC URL: `jdbc:h2:mem:testdb`
+- User Name: `sa`
+- Password: (deixar buit)
+
 ## 📚 Estructura del Projecte
 
 ```
-src/main/java/com/example/miapp/
-├── MiAplicacioApplication.java    # Classe principal
-├── config/                        # Configuracions de Spring
-├── controller/                    # Controladors REST i MVC
+src/main/java/cat/xaviersastre/daw/dwes/codisapunts/
+├── AppInicial.java                # Classe principal
+├── controller/                    # Controladors REST
+│   ├── ControladorAutenticacio.java
+│   └── ControladorUsuaris.java
 ├── service/                       # Lògica de negoci
+│   └── ServeiUsuaris.java
 ├── repository/                    # Accés a dades
+│   └── RepositoriUsuaris.java
 ├── model/                         # Entitats JPA
-├── security/                      # Configuració JWT
+│   ├── Usuari.java
+│   └── Rol.java
+├── security/                      # Configuració JWT i seguretat
+│   ├── GeneradorJWT.java
+│   ├── FiltreJWT.java
+│   └── ServeiDetallsUsuari.java
+├── config/                        # Configuració de Spring Security
+│   └── ConfiguracioSeguretat.java
 ├── dto/                          # Data Transfer Objects
-├── cat.xaviersastre.daw.dwes.codisapunts.mapper/                        # Mapeadors d'entitats
-├── exception/                     # Excepcions personalitzades
-└── util/                         # Utilitats diverses
+│   ├── CredencialLogin.java
+│   └── RespostaLogin.java
+├── mapper/                        # Gestors d'excepcions
+│   └── ManejadorExcepcions.java
+└── exception/                     # Excepcions personalitzades
+    └── UsuariNoTrobatException.java
 ```
 
 ## 🔐 Autenticació
@@ -123,10 +144,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 | PUT | `/api/usuaris/{id}` | Actualitzar usuari |
 | DELETE | `/api/usuaris/{id}` | Eliminar usuari |
 
+### Usuaris - Endpoints addicionals
+
+| Mètode | Endpoint | Descripció |
+|--------|----------|-----------|
+| GET | `/api/usuaris/cerca?nom={nom}` | Cercar usuaris per nom |
+| GET | `/api/usuaris/actius` | Obtenir usuaris actius |
+
 ### Autenticació
 
 | Mètode | Endpoint | Descripció |
 |--------|----------|-----------|
+| GET | `/api/auth/health` | Verificar que el servidor està actiu |
 | POST | `/api/auth/login` | Login d'usuari |
 
 ## 🧪 Proves
